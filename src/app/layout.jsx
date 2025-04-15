@@ -13,12 +13,12 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "Consumo API",
-  description: "Projeto de Front-end desenvolvido em React com Next.js.",
+  description: "Projeto de consumo de APIs externas.",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
       </body>
