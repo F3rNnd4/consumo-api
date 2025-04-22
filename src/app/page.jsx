@@ -1,3 +1,4 @@
+import AnimeList from "@/components/animeList";
 import FilmList from "../components/filmList";
 import styles from "./page.module.css";
 
@@ -6,6 +7,8 @@ export default function Home() {
     <div className={styles.container}>
       <main className={styles.main}>
         <FilmList />
+        
+        <AnimeList />
       </main>
 
       <footer className={styles.footer}>

@@ -2,11 +2,11 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-import styles from "./filmList.module.css";
+import styles from "./animeList.module.css";
 import Loading from "../loading";
 
-const FilmList = () => {
-  const url = "https://ghibliapi.vercel.app/films";
+const AnimeList = () => {
+  const url = "http://localhost:4000/animes";
 
   const [films, setFilms] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,13 +16,13 @@ const FilmList = () => {
     const fetchFilms = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(url);
-        setFilms(response.data);
+        const response = await axios.get(`${url}`);
+        setFilms(response.data.data);
         setLoading(false);
       } catch (error) {
-        console.log("Erro ao buscar os filmes na API");
+        console.log("Erro ao buscar os animes na API");
         setError(
-          "Não foi possível carregar os filmes. Tente novamente mais tarde."
+          "Não foi possível carregar os animes. Tente novamente mais tarde."
         );
         setLoading(false);
       }
@@ -36,28 +36,23 @@ const FilmList = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Filmes do Studio Ghibli</h1>
+      <h1 className={styles.title}>Animes</h1>
 
       {loading ? (
         <Loading />
       ) : (
         <div className={styles.filmGrid}>
           {films.map((film) => (
-            <div key={film.id} className={styles.filmCard}>
+            <div key={film.mal_id} className={styles.filmCard}>
               <div className={styles.imageContainer}>
                 <img
-                  src={film.image}
+                  src={film.images.jpg.image_url}
                   alt={film.title}
                   className={styles.image}
                 />
               </div>
               <div className={styles.content}>
                 <h2 className={styles.filmTitle}>{film.title}</h2>
-                <p className={styles.director}>Diretor: {film.director}</p>
-                <p className={styles.year}>{film.release_date}</p>
-                <div className={styles.rating}>
-                  <span className={styles.score}>{film.rt_score}%</span>
-                </div>
               </div>
             </div>
           ))}
@@ -65,6 +60,6 @@ const FilmList = () => {
       )}
     </div>
   );
-}
+};
 
-export default FilmList;
+export default AnimeList;
